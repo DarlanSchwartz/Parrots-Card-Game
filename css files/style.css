@@ -1,0 +1,82 @@
+body{
+    background-color: #EEF9BF;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+*{
+    font-family: 'Roboto';
+}
+
+header{
+    margin-top: 40px;
+}
+
+.gameTitle{
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 66px;
+    color: rgba(117, 183, 158, 1);
+}
+
+.card {
+    width: 117px;
+    height: 146px;
+    position: relative;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .face {
+    width: 100%;
+    height: 100%;
+    background-color: #A7E9AF;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+  }
+
+  .back-face {
+    transform: rotateY(180deg);
+  }
+
+  .back-face img,
+  .front-face img{
+    width: 100px;
+    height: 100px;
+    padding: auto;
+  }
+
+  .back-face {
+    transform: rotateY(180deg);
+  }
+
+  .card .back-face {
+    transform: rotateY(0deg);
+  }
+
+  .card .front-face {
+    transform: rotateY(-180deg);
+  }
+
+  .cardsContainer{
+    margin-top: 47px;
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    gap: 34px;
+    max-width: 872px;
+    width: auto;
+  }
