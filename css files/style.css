@@ -79,4 +79,5 @@ header{
     gap: 34px;
     max-width: 872px;
     width: auto;
+    justify-content: center;
   }
