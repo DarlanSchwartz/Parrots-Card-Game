@@ -50,12 +50,12 @@ function Setup()
 
     for (let i = 0; i < cardsToShuffle.length; i++) {
         cardsContainer.innerHTML += 
-            `<div class="card back-face" onclick="FlipCard(this)">
+            `<div class="card back-face" onclick="FlipCard(this)"data-test="card">
                 <div class="front-face face">
-                    <img src="./img/back.png" alt="">
+                    <img src="./img/back.png" alt="" data-test="face-down-image">
                 </div>
                 <div class="back-face face">
-                    <img src="${cardsToShuffle[i]}.gif" alt="">
+                <img src="${cardsToShuffle[i]}.gif" alt="" data-test="face-up-image">
                 </div>
             </div>
             `;
@@ -165,6 +165,11 @@ function CheckCompletion(){
 function EndGame()
 {
     alert(`Você ganhou em: ${turnAmount} jogadas!  A duração do jogo foi de ${document.querySelector('.time-elapsed').innerHTML} segundos!`);
+}
+
+function RestartGame()
+{
+    
 }
 
 function comparador() 
