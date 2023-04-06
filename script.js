@@ -50,17 +50,18 @@ function Setup()
 
     for (let i = 0; i < cardsToShuffle.length; i++) {
         cardsContainer.innerHTML += 
-            `<div class="card back-face" onclick="FlipCard(this)" data-test="card">
+            `<div data-test="card" class="card back-face" onclick="FlipCard(this)" >
                 <div class="front-face face">
-                    <img src="./img/back.png" alt="" data-test="face-up-image">
+                    <img data-test="face-down-image" src="./img/back.png">
                 </div>
                 <div class="back-face face">
-                <img src="${cardsToShuffle[i]}.gif" alt="" data-test="face-down-image">
+                <img data-test="face-up-image" src="${cardsToShuffle[i]}.gif" >
                 </div>
             </div>
             `;
       }
 }
+
 
 Setup();
 StartTimer();
