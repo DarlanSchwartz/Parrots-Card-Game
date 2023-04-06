@@ -6,6 +6,9 @@ let turnAmount = 0;
 let seconds = 0;
 let intervalId;
 
+ // Pegar o container das cartas
+const cardsContainer = document.querySelector('.cardsContainer');
+
 // Array de todas as cartas duplicadas para que eu possa usar o slice, cortar no meio, e não faltar cartas..
 // porque o numero de cartas sempre vai ser par e 
 // o slice vai me retornar as cartas de 0 até a quantidade de cartas selecionada
@@ -26,8 +29,6 @@ let avaibleCards = [
     "./img/parrot7",
   ];
 
-
-
 let quantity = prompt("Com quantas cartas você quer jogar? (4 a 14)");
 
 while (
@@ -41,8 +42,6 @@ while (
 
 function Setup()
 {
-    // Pegar o container das cartas
-    let cardsContainer = document.querySelector('.cardsContainer');
     // Pegar as cartas disponiveis e cortar essa array baseado na quantidade de cartas selecionada no inicio
     let cardsToShuffle = avaibleCards.slice(0, quantity);
     // Embaralhar essa array de cartas para embaralhar
@@ -165,12 +164,35 @@ function CheckCompletion(){
 
 function EndGame()
 {
+    StopTimer();
     alert(`Você ganhou em: ${turnAmount} jogadas!  A duração do jogo foi de ${document.querySelector('.time-elapsed').innerHTML} segundos!`);
+    let restart = prompt('Você gostaria de reiniciar a partida?');
+    if(restart === 'sim')
+    {
+        RestartGame();
+    }
 }
 
 function RestartGame()
 {
-    
+    ResetTimer();
+    firstCard = null;
+    secondCard = null;
+    isFlipping = false;
+    cardsContainer.innerHTML = "";
+    quantity = prompt("Com quantas cartas você quer jogar? (4 a 14)");
+
+while (
+    Number(quantity) < 4 ||
+    Number(quantity) > 14 ||
+    Number(quantity) % 2 !== 0
+  ) {
+    quantity = prompt("Seu número deve ser par e entre 4 e 14");
+  }
+
+  Setup();
+  StartTimer();
+  turnAmount = 0;
 }
 
 function comparador() 
