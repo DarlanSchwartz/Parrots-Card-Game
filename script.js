@@ -46,6 +46,7 @@ function Setup()
     let cardsToShuffle = avaibleCards.slice(0, quantity);
     // Embaralhar essa array de cartas para embaralhar
     cardsToShuffle.sort(comparador);
+    cardsContainer.innerHTML = "";
 
     for (let i = 0; i < cardsToShuffle.length; i++) {
         cardsContainer.innerHTML += 
