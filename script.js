@@ -1,19 +1,10 @@
-let quantity = prompt("Com quantas cartas você quer jogar? (4 a 14)");
-
-while (
-    Number(quantity) < 4 ||
-    Number(quantity) > 14 ||
-    Number(quantity) % 2 !== 0
-  ) {
-    quantity = prompt("Seu número deve ser par e entre 4 e 14");
-  }
-
-
 let isFlipping = false;
 let firstCard = null;
 let secondCard = null;
+
 let turnAmount = 0;
-let timePlaying = 0;
+let seconds = 0;
+let intervalId;
 
 // Array de todas as cartas duplicadas para que eu possa usar o slice, cortar no meio, e não faltar cartas..
 // porque o numero de cartas sempre vai ser par e 
@@ -34,6 +25,19 @@ let avaibleCards = [
     "./img/parrot7",
     "./img/parrot7",
   ];
+
+
+
+let quantity = prompt("Com quantas cartas você quer jogar? (4 a 14)");
+
+while (
+    Number(quantity) < 4 ||
+    Number(quantity) > 14 ||
+    Number(quantity) % 2 !== 0
+  ) {
+    quantity = prompt("Seu número deve ser par e entre 4 e 14");
+  }
+
 
 function Setup()
 {
@@ -59,6 +63,7 @@ function Setup()
 }
 
 Setup();
+StartTimer();
 
 function FlipCard(card)
 {
@@ -69,6 +74,11 @@ function FlipCard(card)
     }
     
     if(card.classList.contains("complete"))
+    {
+        return;
+    }
+
+    if(firstCard != null && secondCard != null)
     {
         return;
     }
@@ -105,28 +115,35 @@ function FlipCard(card)
             else
             {
                 console.log('start unfliping both cards');
-                setTimeout(function () {
-                    firstCard.classList.add('back-face');
-                    secondCard.classList.add('back-face');
-                    firstCard = null;
-                    secondCard = null;
-                    isFlipping = false;
-                    console.log('end unfliping cards');
-                  }, 1000);
+                setTimeout(UnflipBothCards, 1000);
             }
 
             if(CheckCompletion() == true)
             {
-                alert("Você ganhou em:" + turnAmount + "jogadas!");
+                setTimeout(EndGame, 1000);
             }
         }
     }
 
-    setTimeout(function () {
-        isFlipping = false;
-      }, 1000);
+    EndFlipping();
+
+    //setTimeout(EndFlipping, 1000);
 }
 
+function UnflipBothCards()
+{
+    firstCard.classList.add('back-face');
+    secondCard.classList.add('back-face');
+    firstCard = null;
+    secondCard = null;
+    isFlipping = false;
+    console.log('end unfliping cards');
+}
+
+function EndFlipping()
+{
+    isFlipping = false;
+}
 
 function CompareCards()
 {
@@ -145,7 +162,35 @@ function CheckCompletion(){
     return completo;
 }
 
+function EndGame()
+{
+    alert(`Você ganhou em: ${turnAmount} jogadas!  A duração do jogo foi de ${document.querySelector('.time-elapsed').innerHTML} segundos!`);
+}
+
 function comparador() 
 { 
     return Math.random() - 0.5; 
 }
+
+function StartTimer() {
+  intervalId = setInterval(UpdateTimer, 1000);
+}
+
+function UpdateTimer() {
+  seconds++;
+  document.querySelector(".time-elapsed").innerHTML = seconds;
+}
+
+function StopTimer() {
+  clearInterval(intervalId);
+}
+
+function ResetTimer() {
+  seconds = 0;
+  document.querySelector(".time-elapsed").innerHTML = seconds;
+}
+
+
+
+
+
